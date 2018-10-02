@@ -17,7 +17,7 @@ public class Main {
 
 	public static void main(String [] args) {
 		
-		String palavra = "rage";
+		String palavra = "fear";
 		String inicio = "https://translate.google.com/?hl=pt#en/pt/";
 		System.out.println("Traduzindo...");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Desenvolvimento\\Downloads\\TCC\\Trabalho de graduação II\\selenium-java-3.14.0\\chromedriver.exe");
@@ -35,19 +35,29 @@ public class Main {
 			driver.get(inicio + palavra);
 			Thread.sleep(1000);
 			
+			System.out.println(driver.findElement(By.id("result_box")).getText());
+			
 			int linhas = driver.findElements(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr")).size();
 			
 			for (int i = 1; i <= linhas; i++) {
-				if (driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[1]")).getText().equals("substantivo")
-						|| driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[1]")).getText().equals("verbo")) {
-					System.out.println(driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[1]")).getText());
-				} else {
+				
+				if (driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[1]")).getText().equals("substantivo")) {
+					System.out.println("É substantivo");
+				}
+				
+				if (driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[1]")).getText().equals("verbo")) {
+					System.out.println("É verbo");
+				}
+				
+				if (driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[1]")).getText().equals("adjetivo")) {
+					System.out.println("É adjetivo");
+				}
+				
+				
+				if (driver.findElements(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i +"]/td")).size() > 2) {
 					System.out.println(driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[" + i + "]/td[3]")).getText());
 				}
 			}
-			
-			//System.out.println(
-			//		driver.findElement(By.xpath("//*[@id=\"gt-lc\"]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[3]/td[3]")).getText());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
