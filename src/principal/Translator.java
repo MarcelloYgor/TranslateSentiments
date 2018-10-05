@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Translator {
 
-	public List translateList(List<String> wordTable) {
+	public List<String> translateList(List<String> wordTable) {
 
 		List<String> result = new ArrayList<>();
 		
@@ -25,7 +25,7 @@ public class Translator {
 
 			driver = new ChromeDriver();
 
-			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			//driver.manage().window().maximize();
 
 			for (int j = 0; j < wordTable.size(); j++) {
@@ -33,7 +33,7 @@ public class Translator {
 				System.out.println(j);
 
 				driver.get(endereco + wordTable.get(j));
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 
 				resultBox = driver.findElement(By.id("result_box")).getText();
 				result.add(resultBox + "%" + j + "@");

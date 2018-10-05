@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TextArchive {
 	
-	public List[] getWordsList() {
+	public List<String>[] getWordsList(String archive) {
 		
 		BufferedReader br = null;
 		String line;
@@ -20,7 +20,7 @@ public class TextArchive {
 		List<String>[] splitResult = new List[2];
 		try {
 			
-			br = new BufferedReader(new FileReader("C:\\SentStrength_Data_english\\SentimentLookupTable.txt"));
+			br = new BufferedReader(new FileReader(archive));
 			
 			while (br.ready()) {
 				line = br.readLine();
@@ -54,12 +54,12 @@ public class TextArchive {
 		return splitResult;
 	}
 	
-	public void writeWords(List<String> wordTable, List<String> classifierTable) {
+	public void writeWords(List<String> wordTable, List<String> classifierTable,  String file) {
 		
 		BufferedWriter bw = null;
 		int classifier;
 		try {
-			bw = new BufferedWriter(new FileWriter("C:\\SentStrength_Data_portuguese\\SentimentLookupTable.txt"));
+			bw = new BufferedWriter(new FileWriter(file));
 			for (String word : wordTable) {
 				classifier = Integer.parseInt(word.substring(word.indexOf("%") + 1, word.indexOf("@")));
 				word = word.substring(0, word.indexOf("%", 0));
