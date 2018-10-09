@@ -24,7 +24,7 @@ public class Conjugator {
 
 			driver = new ChromeDriver();
 
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			//driver.manage().timeouts().implicitlyWait(01, TimeUnit.SECONDS);
 			//driver.manage().window().maximize();
 			
 			for (int j = 0; j < sentimentList.size(); j++) {
@@ -32,15 +32,17 @@ public class Conjugator {
 				System.out.println(j);
 			
 				driver.get(address + sentimentList.get(j) + "/");
-				Thread.sleep(1000);
+				//Thread.sleep(100);
 			
 				int conjugate = driver.findElements(By.xpath("//*[@id=\"conjugacao\"]/div[1]/div/div[1]/p/span/span")).size();
 			
 				if (conjugate > 0) {
 				
 					for (int i = 1; i <= conjugate; i++) {
-						System.out.println(driver.findElement(By.xpath("//*[@id=\"conjugacao\"]/div[1]/div/div[1]/p/span/span[" + i + "]/span[2]")).getText());
-						verbs.add(driver.findElement(By.xpath("//*[@id=\"conjugacao\"]/div[1]/div/div[1]/p/span/span[" + i + "]/span[2]")).getText() + "%" + j + "@");
+						if (!driver.findElement(By.xpath("//*[@id=\"conjugacao\"]/div[1]/div/div[1]/p/span/span[" + i + "]")).getText().equals("--")) {
+							System.out.println(driver.findElement(By.xpath("//*[@id=\"conjugacao\"]/div[1]/div/div[1]/p/span/span[" + i + "]/span[2]")).getText());
+							verbs.add(driver.findElement(By.xpath("//*[@id=\"conjugacao\"]/div[1]/div/div[1]/p/span/span[" + i + "]/span[2]")).getText() + "%" + j + "@");
+						}
 					}
 				}
 			}
