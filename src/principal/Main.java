@@ -37,6 +37,8 @@ public class Main {
 		String file = "C:\\SentStrength_Data_portuguese\\SentimentLookupTable_verbs.txt";
 		
 		List<String>[] wordList;
+		List<String> aux = new ArrayList<>();
+		List<String> aux2 = new ArrayList<>();
 		HashSet<String> consistentList = new HashSet<String>();
 		List<String> verbs;
 		
@@ -44,9 +46,17 @@ public class Main {
 		
 		wordList = txtAr.getWordsList("C:\\SentStrength_Data_portuguese\\SentimentLookupTable.txt");
 		
+		aux2 = wordList[0];
+		
+		for (int i = 0; i < wordList[0].size(); i++) {
+			aux.add(wordList[0].get(i) + "%" + i + "@");
+		}
+		
+		wordList[0] = aux;
+		
 		System.out.println(wordList[0].size());
 		
-		verbs = conjugateVerbs(wordList[0]);
+		verbs = conjugateVerbs(aux2);
 		
 		for (String verb : verbs) {
 			wordList[0].add(verb);
